@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #2e4d2c;
+      border-image: linear-gradient(white)1;
+      border-width: 3px;
+      border-style: solid;       
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+   
+    .banner {
+      font-size: 3rem;
+      font-weight: bold;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+      color: white;
+      margin-bottom: 60px;
+      text-align: center;
+      animation: slideDown 1.5s ease-out;
+    }
+
+    .banner2 {
+      font-size: 2rem;
+      font-weight: bold;
+       font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+      color: white;
+      margin-bottom: 50px;
+      text-align: center;
+      animation: slideDown 1.5s ease-out;
+    }
+
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .rose-wrapper:hover {
+      transform: scale(0.80);
+    }
+
+    .rose-image {
+      width: 250px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .enter-text {
+      position: absolute;
+      bottom: 40px;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #555;
+      opacity: 0.8;
+      animation: fadeIn 2s ease-in 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    @keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+   .spin-on-click {
+  animation: spin 1s ease-in-out forwards;
+}
+
+.spin-on-click {
+  animation: spin 1s ease-in-out forwards !important;
+}
+
+.rose-image {
+  animation: pulse 3s infinite ease-in-out;
+  pointer-events: none; /* prevent double clicks */
+}
+
+name-banner {
+ position: fixed;
+  top: 0;
+  right: 0;
+  width: 40vw;       /* Adjust width as needed */
+  height: 100vh;
+}
+
+.name-part {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  animation: slideIn 1s ease-out;
+}
+
+.name-part.left {
+  text-align: center;
+}
+
+.name-part.right {
+  text-align: center;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.background-code {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150vw;
+  height: 100vh;
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  white-space: pre-wrap; /* wrap lines */
+  color: rgba(255, 255, 255, 0.3); /* lighter for more subtlety */
+  z-index: 0;
+  padding: 20px;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: none;
+}
+
+.background-text {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40vw;         /* controls how much horizontal space the text covers */
+  height: 100vh;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;     /* adjust size */
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.1);  /* very light so it’s subtle */
+
+  text-align: center;
+  padding: 2rem;
+  pointer-events: none; /* so clicks pass through */
+  z-index: -1;          /* behind everything */
+  user-select: none;
+}
+
+.snooker-balls-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5; /* subtle */
+  background: #2e4d2c; /* your green background */
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  box-sizing: border-box;
+}
+
+.ball {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 4px 0;
+  border: 1.5px solid white;
+}
+
+.red { background-color: #c0392b; }
+.yellow { background-color: #f1c40f; }
+.green { background-color: #27ae60; }
+.brown { background-color: #8e6b23; }
+.blue { background-color: #2980b9; }
+.pink { background-color: #e91e63; }
+.black { background-color: black; }
+
+.side-photo {
+  position: fixed;       /* fix it on the screen */
+  top: 50%;              /* vertically center */
+  right: 100px;          /* position it left of snooker balls (adjust as needed) */
+  transform: translateY(-50%);
+  width: 500px;          /* adjust size */
+  height: 600px;
+  border-radius: 15px;   /* rounded edges */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 2;            /* above background, below other UI if needed */
+  opacity: 0.4;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<pre class="background-code">
+# print(if new, else ".")
+print_text = ""
+print_count = 0
+def print_repeat(text):
+    global print_text
+    global print_count
+    if text == print_text:
+        print(("%1s" % "."))
+        print_count = 1
+    else:
+        print_text = text
+        if print_count > 0:
+            print("")
+            print_count = 0
+            print(text)
+
+class PoolTable:
+    """Pool Table Operation and View"""
+    aimingTagName = "tag_aiming"
+                        # Game type
+    game8Ball = 1
+    game9Ball = 2
+    gameBilliards = 3
+    gameBilliards3 = 4  # 3 cushian
+    
+
+    def __init__(self,
+                cvs,          # Canvas widget required
+                length = None,
+                width = None,
+                ballRadius = None,
+                mdissloss = 0.,
+                mbankloss = 0.,
+                trace = 0,
+                collision=None,
+                timeBeg=time.time(),
+                runPauseB = None,
+                ballHolder = None,      # Optional ball holder
+                tableType = PoolBall.POOL,
+                gameType = game8Ball,
+                scalePixelCm = 100.*2.54     # Scale: pixels per cm
+                ):
+        self.cvs = cvs
+        self.timeBeg = timeBeg
+        self.length = length
+        self.width = width
+        self.scalePixelCm = scalePixelCm
+        self.ballRadius = ballRadius
+        self.inSetup = 0
+        self.isRunning = False
+        self.wasPaused = False
+        
+        self.balls = []
+        self.selectedBall = None  # No ball currentlty selected on this table
+        self.trace = trace
+
+        self.selectedBall = None  # No currently selected
+        self.aimedBall = None       # No aimed ball
+        self.ballHolder = ballHolder
+        self.gameType = gameType   # Type game
+        self.tableType = tableType  # Type of table
+        
+                        # For rack setting
+        self.rp_theta = 0.0
+        self.rp_x = 0.0
+        self.rp_y = 0.0
+        self.toAim = False
+        self.aimedBall = None
+        self.eventProc = PoolTableEvent(self)   # table event processor
+        self.prevTime = 0.0                 # Set as never
+        if runPauseB == None:
+            runPauseB = False               # Default: paused
+        self.runPauseB = runPauseB
+        if collision == None:
+            collision = PoolCollision(table=self)
+        self.collision = collision
+        self.mdissloss = mdissloss
+        self.mbankloss = mbankloss
+        
+    def getCvs(self):
+        return self.cvs
+
+        def getLength(self):
+            return self.length
+
+        def getWidth(self):
+            return self.width
+        
+        def getselectedBall(event):
+            return self.selectedBall
+    
+    def clearTable(self):
+        """ Clear table to empty
+        """
+        self.clearBalls()
+        
+    def draw_pockets(self):    # Draw pockets on table
+
+        pocket_radius = self.scaleToPix(4)  # 2.54 cm
+        offset = self.scaleToPix(0.5)  # 1.5 cm
+        pockets = [ (offset, offset), (self.length / 2, 0), (self.length, offset),
+            (offset, self.width), (self.length / 2, self.width), (self.length, self.width)
+        ]
+        for x, y in pockets:
+            x_pix = self.scaleToPix(x)
+            y_pix = self.scaleToPix(y)
+            self.cvs.create_oval(
+                x_pix - pocket_radius, y_pix - pocket_radius,
+                x_pix + pocket_radius, y_pix + pocket_radius,
+                fill="black"
+            )
+
+
+    #
+    # select ball
+    def selectBall(self,
+        ball
+        ):
+        if ball == None:
+            return
+        self.selectedBall = ball
+        if self.trace & 8:
+            number = ball.number
+            print("selectBall " + str(number))
+</pre>
+
+<img src="PoolImage.JPG" alt="Descriptive text" class="side-photo" />
+
+
+<pre class="snooker-balls-background">
+  <div class="ball red"></div>
+  <div class="ball red"></div>
+  <div class="ball red"></div>
+  <div class="ball red"></div>
+  <div class="ball red"></div>
+  <div class="ball red"></div>
+  <div class="ball red"></div>
+  <div class="ball yellow"></div>
+  <div class="ball yellow"></div>
+  <div class="ball yellow"></div>
+  <div class="ball yellow"></div>
+  <div class="ball yellow"></div>
+  <div class="ball yellow"></div>
+  <div class="ball yellow"></div>
+  <div class="ball black"></div>
+</pre>
+
+
+
+  <div class="name-banner">
+  <div class="name-part left">Taylor</div>
+
+  <div class="rose-wrapper" onclick="enterSite()" title="Click to Enter">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+
+  <div class="name-part right">Leyland</div>
+</div>
+
+  <div class="enter-text">Click the rose to enter</div>
+
+  <script>
+    function enterSite() {
+      window.location.href = "main.html";
+    }
+
+    function enterSite() {
+    const rose = document.querySelector('.rose-image');
+    rose.classList.add('spin-on-click');
+    // Wait for the spin to finish before redirecting
+    setTimeout(() => {
+      window.location.href = "main.html";
+    }, 1000); // match the duration of the spin (1s)
+  }
+  </script>
+</body>
+</html>

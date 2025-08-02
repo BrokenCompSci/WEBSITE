@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>My Website</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+        background-color: #2e4d2c;
+    }
+
+    .icons {
+      display: flex;
+      justify-content: space-between; /* or 'space-around' or 'space-evenly' */
+      align-items: center;
+      width: 100%; /* or set a max-width if needed */
+      margin: 0 auto;
+    }
+
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-top: 20px;
+      width: 100px;
+      height: 100px;
+    }
+
+      .rose-wrapper:hover {
+      transform: scale(0.80);
+    }
+
+    .rose-image {
+      width: 40px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .pool-image {
+      width: 75px;
+      color: white;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .code-image {
+      width: 75px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .script-image {
+      width: 75px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .me-image {
+      width: 75px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .icon-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 10px;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s;
+  animation: fadeIn 1.5s ease-in-out;
+}
+.icon-btn:hover {
+  transform: scale(0.85);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 40px 0 10px 0;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.2s, filter 0.2s;
+  filter: grayscale(1) brightness(0.8);
+}
+
+.social-icon:hover {
+  transform: scale(1.15);
+  filter: none;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  text-align: center;
+}
+
+.slide {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 12px;
+  margin-top: -22px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+  border: none;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+.prev {
+  left: 10px;
+}
+.next {
+  right: 10px;
+}
+
+footer {
+  margin-top: 80px; /* Big gap above social icons */
+}
+  </style>
+</head>
+<body>
+
+ <div class="rose-wrapper" onclick="enterSite()" title="Click to Enter">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+
+  <header>
+  <div class="icons"> 
+    <button class="icon-btn" title="Pool">
+      <img src="Pool.png" alt="Pool" class="pool-image" />
+    </button>
+    <button class="icon-btn" title="Code">
+      <img src="Code.png" alt="Code" class="code-image" />
+    </button>
+    <button class="icon-btn" title="Script">
+      <img src="Script.png" alt="Script" class="script-image" />
+    </button>
+    <button class="icon-btn" title="Me">
+      <img src="me.png" alt="Me" class="me-image" />
+    </button>
+  </div>
+</header>
+
+  <main>
+    <main>
+  <div style="display: flex; justify-content: center; margin-top: 40px;">
+    <canvas id="poolCanvas" width="600" height="350" style="border-radius: 12px; background-color: rgb(17, 68, 26); box-shadow: 0 0 20px #000;"></canvas>
+  </div>
+</main>
+
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <img src="Twitter.png" alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://facebook.com/" target="_blank" title="Facebook">
+        <img src="Youtube.png" alt="Youtube" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Instagram.png" alt="Instagram" class="social-icon" />
+      </a>
+      <!-- Add more as needed -->
+    </div>
+  </footer>
+
+    
+ <script>
+  function enterSite() {
+    window.open('https://www.youtube.com/watch?v=ue7wM0QC5LE&t=32s', '_blank');
+  }
+
+  const canvas = document.getElementById("poolCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const balls = [];
+
+  // Add 7 yellow balls
+  for (let i = 0; i < 7; i++) {
+    balls.push({
+      x: Math.random() * 500 + 50,
+      y: Math.random() * 250 + 50,
+      dx: Math.random() * 2 - 1,
+      dy: Math.random() * 2 - 1,
+      radius: 10,
+      color: 'yellow'
+    });
+  }
+
+  // Add 7 red balls
+  for (let i = 0; i < 7; i++) {
+    balls.push({
+      x: Math.random() * 500 + 50,
+      y: Math.random() * 250 + 50,
+      dx: Math.random() * 2 - 1,
+      dy: Math.random() * 2 - 1,
+      radius: 10,
+      color: 'red'
+    });
+  }
+
+  // Add 1 black ball
+  balls.push({
+    x: Math.random() * 500 + 50,
+    y: Math.random() * 250 + 50,
+    dx: Math.random() * 2 - 1,
+    dy: Math.random() * 2 - 1,
+    radius: 10,
+    color: 'black'
+  });
+
+// 1 white ball (cue ball)
+balls.push({
+  x: Math.random() * 500 + 50,
+  y: Math.random() * 250 + 50,
+  dx: Math.random() * 2 - 1,
+  dy: Math.random() * 2 - 1,
+  radius: 10,
+  color: 'white'
+});
+
+
+  function drawBall(ball) {
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fillStyle = ball.color;
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function updateCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    balls.forEach(ball => {
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+
+      // Bounce off walls
+      if (ball.x < ball.radius || ball.x > canvas.width - ball.radius) ball.dx *= -1;
+      if (ball.y < ball.radius || ball.y > canvas.height - ball.radius) ball.dy *= -1;
+
+      drawBall(ball);
+    });
+
+    requestAnimationFrame(updateCanvas);
+  }
+
+  updateCanvas();
+</script>
+
+</script>
+
+
+
+
+</body>
+</html>

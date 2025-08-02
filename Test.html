@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>My Website</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --icon-size: 75px;
+    }
+
+    body {
+      background-color: #2e4d2c;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .icons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      margin: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rose-wrapper:hover {
+      transform: scale(0.90);
+    }
+
+    .rose-image {
+      width: 70px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0 10px;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.2s;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .icon-btn:hover {
+      transform: scale(0.85);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .icon-image {
+      width: var(--icon-size);
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px 0 10px 0;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      transition: transform 0.2s, filter 0.2s;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      filter: none;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto 0 auto;
+      text-align: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+      border: none;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #fff;
+    }
+
+    footer {
+      margin-top: 80px;
+    }
+
+    .Name {
+      text-align: center;
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 24px 0 0 0;
+      letter-spacing: 2px;
+      border-bottom: 100px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rose-wrapper" onclick="enterSite()" title="Click to Enter">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+
+  <div class="Name">Taylor Leyland</div>
+
+  <header>
+    <nav class="icons"> 
+      <button class="icon-btn" title="Pool">
+        <img src="Pool.png" alt="Pool" class="icon-image" />
+      </button>
+      <button class="icon-btn" title="Code">
+        <img src="Code.png" alt="Code" class="icon-image" />
+      </button>
+      <button class="icon-btn" title="Script">
+        <img src="Script.png" alt="Script" class="icon-image" />
+      </button>
+      <button class="icon-btn" title="Me">
+        <img src="me.png" alt="Me" class="icon-image" />
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="slideshow-container" id="slideshow">
+      <img class="slide active" src="photo1.jpg" alt="Photo 1" loading="lazy">
+      <img class="slide" src="photo2.jpg" alt="Photo 2" loading="lazy">
+      <img class="slide" src="photo3.jpg" alt="Photo 3" loading="lazy">
+      <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+      <button class="next" onclick="plusSlides(1)">&#10095;</button>
+      <div class="dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <img src="Twitter.png" alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://facebook.com/" target="_blank" title="Facebook">
+        <img src="Youtube.png" alt="Youtube" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Instagram.png" alt="Instagram" class="social-icon" />
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    function enterSite() {
+      window.open('https://www.youtube.com/watch?v=ue7wM0QC5LE&t=32s', '_blank');
+    }
+
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+    let autoSlideInterval;
+
+    function showSlide(n) {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+        dots[i].classList.remove("active");
+      }
+      slides[n].classList.add("active");
+      dots[n].classList.add("active");
+    }
+
+    function plusSlides(n) {
+      slideIndex = (slideIndex + n + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function currentSlide(n) {
+      slideIndex = n;
+      showSlide(slideIndex);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(() => {
+        plusSlides(1);
+      }, 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    document.getElementById('slideshow').addEventListener('mouseover', stopAutoSlide);
+    document.getElementById('slideshow').addEventListener('mouseout', startAutoSlide);
+
+    showSlide(slideIndex);
+    startAutoSlide();
+  </script>
+
+</body>
+</html>

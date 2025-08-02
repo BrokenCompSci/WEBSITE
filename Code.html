@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Portfolio showcasing AI applications in cue sports, programming languages, and projects." />
+  <title>My Website</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --icon-size: 75px;
+    }
+
+  .train-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.train {
+  font-size: 2rem;
+  animation: trainMove 10s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes trainMove {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+    body {
+      background: repeating-linear-gradient(
+        45deg,
+        #2e4d2c,
+        #2e4d2c 10px,
+        #314f2e 10px,
+        #314f2e 20px
+      );
+      animation: backgroundShift 10s linear infinite;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      margin: 140px auto 0 auto;
+      max-width: 900px;
+    }
+
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rose-wrapper:hover {
+      transform: scale(0.90);
+    }
+
+    .rose-image {
+      width: 70px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .profile-card {
+      color: white;
+      max-width: 300px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+      text-align: center;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .resume-button {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background-color: #2e4d2c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      box-shadow: 0 0 10px #000;
+      transition: background 0.3s ease;
+    }
+
+    .resume-button:hover {
+      background-color: #3a5a38;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      color: #f4f4f4;
+      margin-bottom: 10px;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      padding-bottom: 5px;
+    }
+
+    .diss-image {
+      width: 55px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .Languages, .projects {
+      flex: 1;
+      min-width: 250px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+      font-family: 'Courier New', Courier, monospace;
+      color: white;
+    }
+
+    .Languages {
+      background-color: #2e4d2c;
+    }
+
+    .Languages ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .Languages li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .projects {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .project-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px 0 10px 0;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      transition: transform 0.2s, filter 0.2s;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      filter: none;
+    }
+
+    footer {
+      margin-top: 80px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+      }
+
+      .Languages, .projects, .profile-card {
+        width: 90%;
+        max-width: none;
+      }
+
+      .rose-wrapper {
+        top: 10px;
+        left: 10px;
+        width: 70px;
+        height: 70px;
+      }
+
+      .rose-image {
+        width: 50px;
+      }
+
+      .diss-image {
+        width: 45px;
+      }
+    }
+
+    .language-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.language-list li {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.year-blocks {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+
+.block {
+  width: 10px;
+  height: 10px;
+  background-color: #555;
+  border-radius: 2px;
+}
+
+.block.filled {
+  background-color: #4caf50;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class="rose-wrapper" onclick="enterSite()" title="Return to Home">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose Emblem" class="rose-image" />
+  </div>
+
+  <div class="train-track">
+  <div class="train">⚪</div>
+  </div>
+
+
+  <main>
+    <article class="profile-card">
+      <h2>Applications of AI to Cue Sports Simulation</h2>
+      <p>Attempting to find new ways to analyse and predict cue sports using accurate-to-life simulation.</p>
+      <a href="YourResume.pdf" download class="resume-button">Read Dissertation</a>
+    </article>
+
+    <section class="Languages">
+  <h2>Languages - Years of Experience</h2>
+  <ul class="language-list">
+    <li>
+      <img src="python.png" alt="Python logo" class="diss-image" /> Python
+      <span class="year-blocks">
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+      </span>
+    </li>
+    <li>
+      <img src="java.png" alt="Java logo" class="diss-image" /> Java
+      <span class="year-blocks">
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block"></span>
+        <span class="block"></span>
+      </span>
+    </li>
+    <li>
+      <img src="JavaScript.png" alt="JavaScript logo" class="diss-image" /> JavaScript
+      <span class="year-blocks">
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block"></span>
+        <span class="block"></span>
+      </span>
+    </li>
+    <li>
+      <img src="css.png" alt="CSS logo" class="diss-image" /> CSS
+      <span class="year-blocks">
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block"></span>
+      </span>
+    </li>
+    <li>
+      <img src="sql.png" alt="SQL logo" class="diss-image" /> SQL
+      <span class="year-blocks">
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block"></span>
+        <span class="block"></span>
+      </span>
+    </li>
+    <li>
+      <img src="arduino.png" alt="Arduino logo" class="diss-image" /> Arduino
+      <span class="year-blocks">
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block filled"></span>
+        <span class="block"></span>
+        <span class="block"></span>
+      </span>
+    </li>
+  </ul>
+</section>
+
+
+    <section class="projects" aria-label="Projects">
+      <h2>Projects</h2>
+      <div class="project-card">
+        <h3>AI Pool Simulation</h3>
+        <p>Physics-based simulation to predict cue ball trajectory using machine learning.</p>
+        <a href="https://github.com/yourusername/ai-pool" target="_blank" class="resume-button">View</a>
+      </div>
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>This site! Built with HTML, CSS, and a focus on visuals and performance.</p>
+        <a href="https://github.com/yourusername/portfolio-site" target="_blank" class="resume-button">View</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-icons" aria-label="Social media links">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <img src="Twitter.png" alt="Twitter icon" class="social-icon" />
+      </a>
+      <a href="https://youtube.com/" target="_blank" title="YouTube">
+        <img src="Youtube.png" alt="YouTube icon" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Instagram.png" alt="Instagram icon" class="social-icon" />
+      </a>
+      <a href="https://linkedin.com/" target="_blank" title="LinkedIn">
+        <img src="Linkedin.png" alt="LinkedIn icon" class="social-icon" />
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    function enterSite() {
+      window.location.href = "main.html";
+    }
+  </script>
+
+</body>
+</html>

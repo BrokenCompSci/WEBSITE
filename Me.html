@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>My Website</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --icon-size: 75px;
+    }
+
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #2e4d2c,
+    #2e4d2c 10px,
+    #314f2e 10px,
+    #314f2e 20px
+  );
+  animation: backgroundShift 10s linear infinite;
+}
+
+
+
+@keyframes backgroundShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+a {
+  color: #aad8a5;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 5px #aad8a5;
+}
+
+
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 140px auto 0 auto;
+  max-width: 900px;
+}
+
+.profile-card {
+  color: white;
+  max-width: 300px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #000;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.profile-image {
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #000;
+}
+
+.resume-button {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 24px;
+  background-color: #2e4d2c;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.resume-button:hover {
+  background-color: #3d6a3b;
+}
+
+.about-section {
+  flex: 1;
+  min-width: 250px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #000;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.goals {
+  flex: 2;
+  min-width: 250px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #000;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+.goals h2{
+  margin-top: 0;
+  font-size: 1.8rem;
+  margin-bottom:10px;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+.about-section h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+    .icons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      margin: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rose-wrapper:hover {
+      transform: scale(0.90);
+    }
+
+    .rose-image {
+      width: 70px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+   
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px 0 10px 0;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      transition: transform 0.2s, filter 0.2s;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      filter: none;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto 0 auto;
+      text-align: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+      border: none;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #fff;
+    }
+
+    footer {
+      margin-top: 80px;
+    }
+
+    .Name {
+      text-align: center;
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 24px 0 0 0;
+      letter-spacing: 2px;
+      border-bottom: 100px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+   <div class="rose-wrapper" onclick="enterSite()" title="RETURN!">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+
+  </header>
+<main class="main-content">
+  <div class="profile-card">
+    <img src="Taylor.jpeg" alt="Taylor Leyland" class="profile-image" />
+    <h2>Taylor Leyland</h2>
+    <p>Cue sports player, developer, and writer. I blend precision, logic, and creativity.</p>
+    <a href="YourResume.pdf" download class="resume-button">Download Resume</a>
+  </div>
+
+  <section class="about-section">
+    <h2>About Me</h2>
+    <p>
+    Hi! Im Taylor, I grew up in the industrial town of Bradford. I spent my younger years dreaming of being a scientist until I began coding at 11 with Python which sent me on the path to being a computer scientist! 
+    </p>
+
+    <p>I was educated at Immanuel College, chasing the hard sciences of Mathematics and Physics with a mind-opening blend of Philosophy of which I achieved the highest possible grade in. </p>
+    <p>It was an adventure, I then landed at Keele University where I studied Computer Science with an AI specialisation where I developed a machine learning model for simulating pool which you can find here</p>
+    <p>If im not programming, I'm playing one of the many cue sports, whether its snooker, pool or hayball! I enjoy <a href="writing.html">writing</a> and revel in a good book</p>
+  </section>
+
+
+  <section class="goals">
+    <h2>Goals</h2>
+    <p>I have a desire to keep writing cleaner and more efficient <a href="Code.html">code,</a> which is a continual goal.</p>
+    <p>I have more direct ambitions, learning Go and the French language! Its fascinating to unlock a new world of communication. I am writing a book at the moment about cue sports all over the world, the timeline has me finishing it the summer of 2026</p>
+    <p>The ultimate goal is to achieve what Turing wanted, to create a conscious computer. A high but worthy goal and my own studies, ideas and  <a href="Code.html">work</a> that will hopefully add to that race</p>
+
+  </section>
+
+  
+</main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <img src="Twitter.png" alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://facebook.com/" target="_blank" title="Facebook">
+        <img src="Youtube.png" alt="Youtube" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Instagram.png" alt="Instagram" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Linkedin.png" alt="Instagram" class="social-icon" />
+      </a>
+    </div>
+  </footer>
+
+  <script>
+
+
+    function enterSite() {
+      window.location.href = "main.html";
+    }
+
+   
+  </script>
+
+</body>
+</html>

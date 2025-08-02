@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<!-- Leaflet JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const map = L.map('uk-map').setView([54.5, -3], 6); // Centered on the UK
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Add club markers
+    const clubs = [
+      { name: "Leeds Pool Club", coords: [53.8008, -1.5491] },
+      { name: "Manchester Snooker Centre", coords: [53.4808, -2.2426] },
+      { name: "London Billiards Hall", coords: [51.5072, -0.1276] }
+    ];
+
+    clubs.forEach(club => {
+      L.marker(club.coords)
+        .addTo(map)
+        .bindPopup(`<b>${club.name}</b>`);
+    });
+  });
+</script>
+
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>My Website</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --icon-size: 75px;
+    }
+
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #2e4d2c,
+    #2e4d2c 10px,
+    #314f2e 10px,
+    #314f2e 20px
+  );
+  animation: backgroundShift 10s linear infinite;
+}
+
+.achievements h3 {
+  margin-top: 20px;
+  color: #cceecf;
+  font-size: 1.2rem;
+}
+
+.achievements ul li {
+  margin-bottom: 10px;
+}
+
+
+@keyframes backgroundShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+.achievements-collage {
+  display: flex;
+  gap: 20px;
+  max-width: 900px;
+  margin: 40px auto;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  flex-wrap: wrap;
+}
+
+.achievements {
+  flex: 1 1 300px;
+}
+
+.achievements h2 {
+  margin-bottom: 16px;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 8px;
+}
+
+.achievements ul {
+  list-style: disc inside;
+  line-height: 1.6;
+}
+
+.collage {
+  flex: 1 1 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  border-radius: 12px;
+}
+
+.collage img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.collage img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* Responsive fallback */
+@media (max-width: 700px) {
+  .achievements-collage {
+    flex-direction: column;
+  }
+  .achievements, .collage {
+    flex: 1 1 100%;
+  }
+}
+
+.map-section {
+  max-width: 900px;
+  margin: 60px auto;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#uk-map {
+  height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin-top: 20px;
+}
+
+.league-performance {
+  max-width: 900px;
+  margin: 60px auto;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.CueScore {
+  max-width: 900px;
+  margin: 60px auto;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.CueScore h2 {
+  margin-bottom: 16px;
+  border-bottom: 2px solid #fff;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+
+
+.league-performance h2 {
+  margin-bottom: 16px;
+  border-bottom: 2px solid #fff;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.league-widget {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin-bottom: 16px;
+}
+
+.btn-league {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #2e4d2c;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.btn-league:hover {
+  background: #314f2e;
+}
+
+
+
+
+
+    .icons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      margin: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rose-wrapper:hover {
+      transform: scale(0.90);
+    }
+
+    .rose-image {
+      width: 70px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+   
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px 0 10px 0;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      transition: transform 0.2s, filter 0.2s;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      filter: none;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto 0 auto;
+      text-align: center;
+    }
+
+    .slide {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+      border: none;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #fff;
+    }
+
+    footer {
+      margin-top: 80px;
+    }
+
+    .Name {
+      text-align: center;
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 24px 0 0 0;
+      letter-spacing: 2px;
+      border-bottom: 100px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rose-wrapper" onclick="enterSite()" title="RETURN!">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+
+
+  <header>
+   
+  </header>
+
+  <main>
+  <section class="achievements-collage">
+   <div class="achievements">
+  <h2>🎱 My Cue Sports Achievements</h2>
+  
+  <h3>🏫 University Highlights</h3>
+  <ul>
+    <li><strong>Keele University 2nd Team Captain</strong> — Led the team through BUCS</li>
+    <li><strong>BUCS 2023</strong> — Reached the <em>Top 32</em> nationally.</li>
+    <li><strong>BUCS 2024</strong> — Improved to the <em>Top 16</em>, showing strong progression and consistency.</li>
+  </ul>
+
+  <h3>🎯 Individual Highlights</h3>
+  <ul>
+    <li><strong>Highest Snooker Break:</strong> 67 — A personal milestone showcasing skill and precision.</li>
+    <li><strong>Pro Players</strong> — I didn't get dished by Aaron Davies</li>
+  </ul>
+</div>
+
+
+    <div class="collage">
+      <img src="pool1.png" alt="Pool match 1" />
+      <img src="pool2.jpeg" alt="Pool match 2" />
+      <img src="pool3.jpeg" alt="Pool match 3" />
+      <img src="pool4.jpeg" alt="Pool match 4" />
+      <img src="pool5.jpeg" alt="Pool match 5" />
+      <img src="pool6.jpeg" alt="Pool match 6" />
+      <img src="pool7.jpeg" alt="Pool match 7" />
+      <img src="pool8.jpeg" alt="Pool match 8" />
+      <!-- Add more images as needed -->
+    </div>
+  </section>
+
+  <section class="map-section">
+  <h2>Clubs I've Played At</h2>
+  <div id="uk-map"></div>
+  </section>
+
+  <section class="league-performance">
+  <h2>South Bradford League Performance</h2>
+
+  <p style="margin-top: 12px;">
+    <a href="https://southbradford.leaguerepublic.com/player/546591105.html" target="_blank" class="btn-league">open full profile</a>
+  </p>
+
+
+</section>
+
+<section class="CueScore">
+  <h2>CueScore Profile</h2>
+
+  <p style="margin-top: 12px;">
+    <a href="https://cuescore.com/player/Taylor+Dennett/37017823" target="_blank" class="btn-league">open full profile</a>
+  </p>
+
+
+</section>
+
+
+</main>
+
+
+
+
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <img src="Twitter.png" alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://facebook.com/" target="_blank" title="Facebook">
+        <img src="Youtube.png" alt="Youtube" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Instagram.png" alt="Instagram" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Linkedin.png" alt="Instagram" class="social-icon" />
+      </a>
+    </div>
+  </footer>
+
+  <script>
+
+
+    function enterSite() {
+      window.location.href = "main.html";
+    }
+
+   
+  </script>
+
+</body>
+</html>
