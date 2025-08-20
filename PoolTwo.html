@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cue Sports Profile</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body {
+      background: repeating-linear-gradient(45deg, #2e4d2c, #2e4d2c 10px, #314f2e 10px, #314f2e 20px);
+      animation: backgroundShift 10s linear infinite;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
+    }
+
+    .CueScore {
+      max-width: 900px;
+      margin: 60px auto;
+      background: rgba(0,0,0,0.3);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      text-align: left;
+    }
+
+    .CueScore h2 {
+      border-bottom: 2px solid #fff;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      font-size: 1.8rem;
+    }
+
+    .cuescore-stats ul {
+      list-style: none;
+      padding-left: 0;
+      line-height: 1.6;
+    }
+
+    .cuescore-stats li {
+      margin-bottom: 10px;
+      color: #cceecf;
+    }
+
+    .btn-league {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 20px;
+      background: #2e4d2c;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn-league:hover {
+      background: #314f2e;
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px 0 10px 0;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      transition: transform 0.2s, filter 0.2s;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      filter: none;
+    }
+
+    #uk-map {
+      height: 500px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CueScore Section -->
+  <section class="CueScore">
+    <h2>CueScore Profile</h2>
+    <p>
+      My CueScore profile tracks my tournament progress, match wins/losses, and recent form.
+    </p>
+
+    <div class="cuescore-stats" id="cuescore-data">
+      <p>Loading recent stats...</p>
+    </div>
+
+    <p style="margin-top: 16px;">
+      <a href="https://cuescore.com/player/Taylor+Dennett/37017823" target="_blank" class="btn-league">View Full CueScore Profile</a>
+    </p>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <h2>Clubs I've Played At</h2>
+    <div id="uk-map"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <img src="Twitter.png" alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://facebook.com/" target="_blank" title="Facebook">
+        <img src="Youtube.png" alt="Youtube" class="social-icon" />
+      </a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram">
+        <img src="Instagram.png" alt="Instagram" class="social-icon" />
+      </a>
+      <a href="https://linkedin.com/" target="_blank" title="LinkedIn">
+        <img src="Linkedin.png" alt="LinkedIn" class="social-icon" />
+      </a>
+    </div>
+  </footer>
+
+  <!-- JS Logic -->
+  <script>
+    // Leaflet map initialization
+    document.addEventListener('DOMContentLoaded', function () {
+      const map = L.map('uk-map').setView([54.5, -3], 6);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      const clubs = [
+        { name: "Leeds Pool Club", coords: [53.8008, -1.5491] },
+        { name: "Manchester Snooker Centre", coords: [53.4808, -2.2426] },
+        { name: "London Billiards Hall", coords: [51.5072, -0.1276] }
+      ];
+
+      clubs.forEach(club => {
+        L.marker(club.coords).addTo(map).bindPopup(`<b>${club.name}</b>`);
+      });
+
+      // Simulate dynamic CueScore data (mock)
+      const mockCueScore = {
+        recentTournament: "Yorkshire Open 2025",
+        result: "Quarter Finals",
+        form: ["W", "W", "L", "W", "W"],
+        points: 1120
+      };
+
+      const container = document.getElementById('cuescore-data');
+      container.innerHTML = `
+        <ul>
+          <li><strong>Recent Tournament:</strong> ${mockCueScore.recentTournament}</li>
+          <li><strong>Finish:</strong> ${mockCueScore.result}</li>
+          <li><strong>Current Form:</strong> ${mockCueScore.form.join("-")}</li>
+          <li><strong>Ranking Points:</strong> ${mockCueScore.points}</li>
+        </ul>
+      `;
+    });
+  </script>
+</body>
+</html>

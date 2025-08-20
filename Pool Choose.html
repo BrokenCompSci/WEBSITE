@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pool Table Layout with Pockets & Rails</title>
+  <style>
+    :root { --icon-size: 75px; }
+    body {
+      background: repeating-linear-gradient(45deg, #2e4d2c, #2e4d2c 10px, #314f2e 10px, #314f2e 20px);
+      animation: backgroundShift 10s linear infinite;
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      color: white;
+      text-align: center;
+      user-select: none;
+    }
+    @keyframes backgroundShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
+    }
+    .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .rose-wrapper:hover { transform: scale(0.90); }
+    .rose-image { width: 70px; animation: pulse 3s infinite ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    canvas {
+      border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+      margin-top: 140px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .controls {
+      margin: 20px auto 60px;
+    }
+    select, button {
+      padding: 8px 16px;
+      margin: 0 10px 10px 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      font-family: 'Courier New', monospace;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="rose-wrapper" onclick="enterSite()" title="RETURN!">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+</header>
+
+<canvas id="poolCanvas" width="600" height="350"></canvas>
+
+<div class="controls">
+  <label for="gameType">Game:</label>
+  <select id="gameType">
+    <option value="english">English Pool (International)</option>
+    <option value="american10">American 10-Ball</option>
+  </select>
+
+  <label for="clothColour">Cloth Colour:</label>
+  <select id="clothColour">
+    <option value="#00b3b3">Cyan</option>
+    <option value="green">Green</option>
+    <option value="grey">Grey</option>
+  </select>
+
+  <label for="railColour">Rail Colour:</label>
+  <select id="railColour">
+    <option value="brown">Brown</option>
+    <option value="black">Black</option>
+  </select>
+
+  <button onclick="generateRack()">Generate Rack</button>
+  <button onclick="saveAsPDF()">Save as PDF</button>
+</div>
+
+<script>
+function enterSite() {
+  window.location.href = "main.html";
+}
+
+const canvas = document.getElementById("poolCanvas");
+const ctx = canvas.getContext("2d");
+let balls = [];
+let selectedBall = null;
+let offsetX, offsetY;
+
+const ballRadius = 12;
+
+// Colours for English balls
+const englishColours = {
+  yellow: "#FFD700",
+  red: "#D32F2F",
+  black: "#000000"
+};
+
+// Colours for American 10-ball balls
+const americanColours = {
+  1: "#FFD700",
+  2: "#1976D2",
+  3: "#D32F2F",
+  4: "#6A1B9A",
+  5: "#F57C00",
+  6: "#388E3C",
+  7: "#7B1FA2",
+  8: "#000000",
+  9: "#FFD700",
+  10: "#1976D2"
+};
+
+function generateEnglishRack() {
+  const rack = Array(15).fill(null);
+  rack[4] = "black";  
+  rack[10] = "yellow"; 
+  rack[14] = "red";    
+
+  let yellowLeft = 6;
+  let redLeft = 6;
+  
+  for (let i = 0; i < 15; i++) {
+    if (rack[i] !== null) continue;
+    if (yellowLeft > redLeft) {
+      rack[i] = "yellow";
+      yellowLeft--;
+    } else if (redLeft > yellowLeft) {
+      rack[i] = "red";
+      redLeft--;
+    } else {
+      if (i > 0 && rack[i - 1] === "yellow") {
+        rack[i] = "red";
+        redLeft--;
+      } else {
+        rack[i] = "yellow";
+        yellowLeft--;
+      }
+    }
+  }
+  return rack;
+}
+
+function generateAmerican10BallRack() {
+  return [1, 2, 3, 4, 5, 10, 6, 7, 8, 9];
+}
+
+function generateRack() {
+  const gameType = document.getElementById("gameType").value;
+  const clothColour = document.getElementById("clothColour").value;
+  canvas.style.backgroundColor = clothColour;
+  balls = [];
+
+  if (gameType === "english") {
+    const rack = generateEnglishRack();
+    placeEnglishRack(rack);
+  } else {
+    const order = generateAmerican10BallRack();
+    placeAmericanDiamond(order);
+  }
+
+  // Add a white cue ball at a fixed starting position
+  balls.push({ x: 100, y: 300, colour: "#FFFFFF", label: "" });
+
+  drawTable();
+  drawBalls();
+}
+
+// Place English balls in triangle
+function placeEnglishRack(rack) {
+  const startX = 250;
+  const startY = 175;
+  let index = 0;
+  for (let row = 0; row < 5; row++) {
+    for (let col = 0; col <= row; col++) {
+      const x = startX + row * ballRadius * 1.9;
+      const y = startY - row * ballRadius + col * ballRadius * 2;
+      const colorKey = rack[index];
+      balls.push({ x, y, colour: englishColours[colorKey], label: "" });
+      index++;
+    }
+  }
+}
+
+// Place American balls in diamond
+function placeAmericanDiamond(order) {
+  const startX = 350;
+  const startY = 175;
+  const rows = [1, 2, 3, 4];
+  let posIndex = 0;
+  for (let row = 0; row < rows.length; row++) {
+    const ballsInRow = rows[row];
+    const rowYStart = startY - (ballsInRow - 1) * ballRadius;
+    for (let col = 0; col < ballsInRow; col++) {
+      const x = startX + row * ballRadius * 2;
+      const y = rowYStart + col * ballRadius * 2;
+      const ballNum = order[posIndex];
+      balls.push({ x, y, colour: americanColours[ballNum], label: ballNum.toString() }); // Add label as string
+      posIndex++;
+    }
+  }
+}
+
+function drawTable() {
+  const railColour = document.getElementById("railColour").value;
+
+  // Clear whole canvas first
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw rails as thick rectangles around the edges
+  const railThickness = 24;
+  ctx.fillStyle = railColour === "brown" ? "#654321" : "#000000";
+
+  // Top rail
+  ctx.fillRect(0, 0, canvas.width, railThickness);
+  // Bottom rail
+  ctx.fillRect(0, canvas.height - railThickness, canvas.width, railThickness);
+  // Left rail
+  ctx.fillRect(0, 0, railThickness, canvas.height);
+  // Right rail
+  ctx.fillRect(canvas.width - railThickness, 0, railThickness, canvas.height);
+
+  // Draw cloth (inner table) rectangle inside rails
+  const innerX = railThickness;
+  const innerY = railThickness;
+  const innerWidth = canvas.width - 2 * railThickness;
+  const innerHeight = canvas.height - 2 * railThickness;
+
+  ctx.fillStyle = canvas.style.backgroundColor || "green";
+  ctx.fillRect(innerX, innerY, innerWidth, innerHeight);
+
+  // Draw pockets - 6 pockets, radius 16, positioned at corners and midpoints of rails
+  const pocketRadius = 16;
+  const pockets = [
+    { x: railThickness, y: railThickness }, // top-left corner
+    { x: canvas.width / 2, y: railThickness }, // top-center
+    { x: canvas.width - railThickness, y: railThickness }, // top-right corner
+    { x: railThickness, y: canvas.height - railThickness }, // bottom-left corner
+    { x: canvas.width / 2, y: canvas.height - railThickness }, // bottom-center
+    { x: canvas.width - railThickness, y: canvas.height - railThickness }, // bottom-right corner
+  ];
+
+  ctx.fillStyle = "#222222"; // dark pockets color
+  pockets.forEach(pocket => {
+    ctx.beginPath();
+    ctx.arc(pocket.x, pocket.y, pocketRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#444444";
+    ctx.stroke();
+  });
+}
+
+function drawBalls() {
+  balls.forEach(ball => {
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = ball.colour;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+    // Draw stripes for balls 9 & 10 (optional)
+    if (ball.label === "9" || ball.label === "10") {
+      ctx.beginPath();
+      ctx.moveTo(ball.x - ballRadius, ball.y);
+      ctx.lineTo(ball.x + ballRadius, ball.y);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "white";
+      ctx.stroke();
+    }
+
+    // Draw number label for American balls
+    if (ball.label) {
+      ctx.fillStyle = "white";
+      ctx.font = "bold 14px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(ball.label, ball.x, ball.y);
+    }
+  });
+}
+
+// Drag & drop logic
+canvas.addEventListener("mousedown", e => {
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+  selectedBall = null;
+  for (let i = balls.length - 1; i >= 0; i--) {
+    const ball = balls[i];
+    const dx = mouseX - ball.x;
+    const dy = mouseY - ball.y;
+    if (Math.sqrt(dx*dx + dy*dy) <= ballRadius) {
+      selectedBall = ball;
+      offsetX = dx;
+      offsetY = dy;
+      break;
+    }
+  }
+});
+
+canvas.addEventListener("mousemove", e => {
+  if (!selectedBall) return;
+  const rect = canvas.getBoundingClientRect();
+  selectedBall.x = e.clientX - rect.left - offsetX;
+  selectedBall.y = e.clientY - rect.top - offsetY;
+  drawTable();
+  drawBalls();
+});
+
+canvas.addEventListener("mouseup", () => {
+  selectedBall = null;
+});
+canvas.addEventListener("mouseleave", () => {
+  selectedBall = null;
+});
+
+// Save canvas as PDF
+async function saveAsPDF() {
+  const { jsPDF } = window.jspdf;
+
+  // Convert canvas to image data URL
+  const imgData = canvas.toDataURL("image/png");
+
+  // Create a jsPDF instance matching canvas size in px, landscape
+  const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "px",
+    format: [canvas.width, canvas.height]
+  });
+
+  // Add image to PDF at 0,0 with canvas size
+  pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+  // Save the PDF file
+  pdf.save("pool-table-layout.pdf");
+}
+
+// Initial rack generation
+generateRack();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+</html>
