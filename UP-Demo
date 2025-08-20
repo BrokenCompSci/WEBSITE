@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>UP Event Analysis</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: repeating-linear-gradient(
+        45deg,
+        #2e4d2c,
+        #2e4d2c 10px,
+        #314f2e 10px,
+        #314f2e 20px
+      );
+      color: #fff;
+    }
+
+     .rose-wrapper {
+      animation: fadeIn 1.5s ease-in-out;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      margin: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rose-wrapper:hover {
+      transform: scale(0.90);
+    }
+
+    .rose-image {
+      width: 70px;
+      height: auto;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .project-card {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
+      box-shadow: 0 0 15px #000;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+    }
+
+    .pdf-preview {
+      width: 100%;
+      height: 600px;
+      border: none;
+      background-color: #222;
+    }
+
+    .project-info {
+      padding: 12px 16px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .project-info a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .project-info a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      filter: grayscale(1) brightness(0.8);
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+      filter: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rose-wrapper" onclick="enterSite()" title="RETURN!">
+    <img src="yorkshire-rose-clipart.png" alt="Yorkshire Rose" class="rose-image" />
+  </div>
+
+  <header>
+    <h1>UP Events Analysis</h1>
+  </header>
+
+  <main>
+    <div class="gallery">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <iframe class="pdf-preview" src="European_Open.pdf"></iframe>
+        <div class="project-info">
+          <div>UP European Open</div>
+          <a href="https://lookerstudio.google.com/reporting/09488407-df7c-4e57-9f92-5664e3d8e046" target="_blank">Visit on Looker</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <iframe class="pdf-preview" src="ProSeriesEventOne.pdf"></iframe>
+        <div class="project-info">
+          <div>Pro Series Event One</div>
+          <a href="https://lookerstudio.google.com/s/tM3Brob8GrI" target="_blank">Visit on Looker</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <iframe class="pdf-preview" src="Masters_2024_Review.pdf"></iframe>
+        <div class="project-info">
+          <div>2024 Masters</div>
+          <a href="https://lookerstudio.google.com/s/jBqyAOLMrRA" target="_blank">Visit on Looker</a>
+        </div>
+      </div>
+
+      <!-- Add more projects by duplicating project-card -->
+    </div>
+    <div class="gallery">
+      <div class="project-card">
+        <iframe class="pdf-preview" src="European_Open.pdf"></iframe>
+        <div class="project-info">
+          <div>Players Championship</div>
+          <a href="https://lookerstudio.google.com/reporting/2b48ac60-2a69-40fc-8616-f98613b021c8" target="_blank">Visit on Looker</a>
+        </div>
+    </divd>
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank"><img src="Twitter.png" alt="Twitter" class="social-icon" /></a>
+      <a href="https://facebook.com/" target="_blank"><img src="Youtube.png" alt="Youtube" class="social-icon" /></a>
+      <a href="https://instagram.com/" target="_blank"><img src="Instagram.png" alt="Instagram" class="social-icon" /></a>
+      <a href="https://linkedin.com/" target="_blank"><img src="Linkedin.png" alt="LinkedIn" class="social-icon" /></a>
+    </div>
+  </footer>
+
+    <script>
+
+
+    function enterSite() {
+      window.location.href = "Code.html";
+    }
+
+   
+  </script>
+
+</body>
+</html>
